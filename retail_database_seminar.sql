@@ -79,11 +79,10 @@ CREATE TABLE `deliveryorder` (
 --
 
 CREATE TABLE `deliveryorderdetail` (
-  `delivery_order_id` varchar(255) NOT NULL,
-  `product_instance_id` varchar(255) NOT NULL,
-  `is_checked` tinyint(1) NOT NULL
+  `delivery_order_id` int(11) NOT NULL,
+  `product_instance_id` varchar(30) NOT NULL,
+  `is_checked` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- --------------------------------------------------------
 
 --
@@ -155,7 +154,7 @@ ALTER TABLE `deliveryorder`
 -- Indexes for table `deliveryorderdetail`
 --
 ALTER TABLE `deliveryorderdetail`
-  ADD PRIMARY KEY (`delivery_order_id`),
+  ADD PRIMARY KEY (`delivery_order_id`,`product_instance_id`),
   ADD KEY `product_instance_id` (`product_instance_id`);
 
 --
