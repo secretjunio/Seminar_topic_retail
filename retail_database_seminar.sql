@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 01:37 PM
+-- Generation Time: Apr 15, 2022 at 01:59 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -105,7 +105,7 @@ CREATE TABLE `producline` (
 
 CREATE TABLE `productinstancerfid` (
   `product_instance_id` varchar(255) NOT NULL,
-  `product_line` varchar(255) NOT NULL,
+  `product_line_id` varchar(255) NOT NULL,
   `is_purchased` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -129,13 +129,21 @@ CREATE TABLE `tagread` (
 -- Indexes for table `auditreport`
 --
 ALTER TABLE `auditreport`
-  ADD PRIMARY KEY (`audit_id`);
+  ADD PRIMARY KEY (`audit_id`),
+  ADD KEY `product_line_id` (`product_line_id`);
 
 --
 -- Indexes for table `bill`
 --
 ALTER TABLE `bill`
   ADD PRIMARY KEY (`bill_id`);
+
+--
+-- Indexes for table `billdetails`
+--
+ALTER TABLE `billdetails`
+  ADD PRIMARY KEY (`bill_id`,`product_instance_id`),
+  ADD KEY `product_instance_id` (`product_instance_id`);
 
 --
 -- Indexes for table `deliveryorder`
@@ -147,7 +155,8 @@ ALTER TABLE `deliveryorder`
 -- Indexes for table `deliveryorderdetail`
 --
 ALTER TABLE `deliveryorderdetail`
-  ADD PRIMARY KEY (`delivery_order_id`);
+  ADD PRIMARY KEY (`delivery_order_id`),
+  ADD KEY `product_instance_id` (`product_instance_id`);
 
 --
 -- Indexes for table `producline`
@@ -159,13 +168,51 @@ ALTER TABLE `producline`
 -- Indexes for table `productinstancerfid`
 --
 ALTER TABLE `productinstancerfid`
-  ADD PRIMARY KEY (`product_instance_id`);
+  ADD PRIMARY KEY (`product_instance_id`),
+  ADD KEY `product_line_id` (`product_line_id`);
 
 --
 -- Indexes for table `tagread`
 --
 ALTER TABLE `tagread`
-  ADD PRIMARY KEY (`tad_read_id`);
+  ADD PRIMARY KEY (`tad_read_id`),
+  ADD KEY `product_instance_id` (`product_instance_id`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `auditreport`
+--
+ALTER TABLE `auditreport`
+  ADD CONSTRAINT `auditreport_ibfk_1` FOREIGN KEY (`product_line_id`) REFERENCES `producline` (`product_line_id`);
+
+--
+-- Constraints for table `billdetails`
+--
+ALTER TABLE `billdetails`
+  ADD CONSTRAINT `billdetails_ibfk_1` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`),
+  ADD CONSTRAINT `billdetails_ibfk_2` FOREIGN KEY (`product_instance_id`) REFERENCES `productinstancerfid` (`product_instance_id`);
+
+--
+-- Constraints for table `deliveryorderdetail`
+--
+ALTER TABLE `deliveryorderdetail`
+  ADD CONSTRAINT `deliveryorderdetail_ibfk_1` FOREIGN KEY (`product_instance_id`) REFERENCES `productinstancerfid` (`product_instance_id`),
+  ADD CONSTRAINT `deliveryorderdetail_ibfk_2` FOREIGN KEY (`delivery_order_id`) REFERENCES `deliveryorder` (`delivery_Order_id`);
+
+--
+-- Constraints for table `productinstancerfid`
+--
+ALTER TABLE `productinstancerfid`
+  ADD CONSTRAINT `productinstancerfid_ibfk_1` FOREIGN KEY (`product_line_id`) REFERENCES `producline` (`product_line_id`);
+
+--
+-- Constraints for table `tagread`
+--
+ALTER TABLE `tagread`
+  ADD CONSTRAINT `tagread_ibfk_1` FOREIGN KEY (`product_instance_id`) REFERENCES `productinstancerfid` (`product_instance_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
