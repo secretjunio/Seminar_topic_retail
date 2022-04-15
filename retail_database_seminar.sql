@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 01:59 PM
+-- Generation Time: Apr 15, 2022 at 02:01 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -66,7 +66,7 @@ CREATE TABLE `billdetails` (
 
 CREATE TABLE `deliveryorder` (
   `delivery_Order_id` varchar(255) NOT NULL,
-  `delivery_Order_idate` date NOT NULL,
+  `delivery_Order_date` date NOT NULL,
   `order_status` varchar(255) NOT NULL,
   `expected_quantity` int(255) NOT NULL,
   `actual_quantity` int(255) NOT NULL
