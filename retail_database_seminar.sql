@@ -81,7 +81,7 @@ CREATE TABLE `deliveryorder` (
 CREATE TABLE `deliveryorderdetail` (
   `delivery_order_id` int(11) NOT NULL,
   `product_instance_id` varchar(30) NOT NULL,
-  `is_checked` int(11) NOT NULL
+  `is_checked` bool NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- --------------------------------------------------------
 
