@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 01:12 PM
+-- Generation Time: Apr 15, 2022 at 01:37 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -75,6 +75,18 @@ CREATE TABLE `deliveryorder` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deliveryorderdetail`
+--
+
+CREATE TABLE `deliveryorderdetail` (
+  `delivery_order_id` varchar(255) NOT NULL,
+  `product_instance_id` varchar(255) NOT NULL,
+  `is_checked` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `producline`
 --
 
@@ -130,6 +142,12 @@ ALTER TABLE `bill`
 --
 ALTER TABLE `deliveryorder`
   ADD PRIMARY KEY (`delivery_Order_id`);
+
+--
+-- Indexes for table `deliveryorderdetail`
+--
+ALTER TABLE `deliveryorderdetail`
+  ADD PRIMARY KEY (`delivery_order_id`);
 
 --
 -- Indexes for table `producline`
