@@ -121,6 +121,16 @@ CREATE TABLE `tagread` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Table structure for table `tagreader`
+--
+
+CREATE TABLE `tagreader` (
+  `tag_reader_id` varchar(255) NOT NULL,
+  `mac_address` varchar(255) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
 -- Indexes for dumped tables
 --
 
@@ -176,6 +186,13 @@ ALTER TABLE `productinstancerfid`
 ALTER TABLE `tagread`
   ADD PRIMARY KEY (`tad_read_id`),
   ADD KEY `product_instance_id` (`product_instance_id`);
+
+--
+-- Indexes for table `tagreader`
+--
+ALTER TABLE `tagreader`
+  ADD PRIMARY KEY (`tag_reader_id`);
+
 
 --
 -- Constraints for dumped tables
